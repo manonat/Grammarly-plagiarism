@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base target="_top">
+   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<!--DataTable Bootstrap5--->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+ <link rel="stylesheet" href=" https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap5.min.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Prompt">
+<style>
+
+body {
+	font-family: "Prompt", sans-serif;
+	font-size: 16px;
+}
+/* table thead {
+  background:#0033FF;
+	color: white;
+	font-size: 16px;
+} */
+</style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row py-3">
+
+            <div class="col-lg-4 col-md-8 mx-auto shadow bg-white p-3 border border-dark rounded-3 text-center">
+                <img src="https://i.ibb.co/C99YMPk/logo-60.png" width="50" height="65">
+                <form id="search-form" class="form-inline" onsubmit="submitForm(this)">
+                    <div class="form-group mb-3 ">
+                        <label for="searchtext">ระบบค้นหาข้อมูล โดย ครูอภิวัฒน์"สอนสร้างสื่อ"</label>
+                    </div>
+                    <div class="form-group mb-3 ">
+                        <input type="text" class="form-control" id="input1" name="input1" placeholder="พิมพ์ชื่อ นามสกุล" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mb-2">ค้นหา</button>
+                </form>
+
+            </div>
+        </div>
+
+<div class="row">
+ <table id="example" class="table table-striped dt-responsive nowrap" style="width:100%">
+  <thead class="bg-primary text-white"></thead></table>
+</div>
+
+
+    </div>
+    <script>
+function submitForm(obj){
+  event.preventDefault()
+  google.script.run.withSuccessHandler(showTable).searhData(obj)
+  
+}
+        //แสดงตาราง
+        function showTable(dataArray) {
+          document.getElementById("search-form").reset()
+            if (dataArray && dataArray !== undefined && dataArray.length != 0) {
+               $('#example').DataTable({
+                 data:dataArray,
+                 destroy:true,
+                 responsive: true,
+                 columns:[
+                   {title: 'เลขประชาชน'},
+                   {title: 'เลขประจำตัว'},
+                   {title: 'ชื่อ สกุล'},
+                   {title: 'เลขที่'},
+                   {title: 'ก่อนกลางภาค'},
+                   {title: 'กลางภาค'},
+                   {title: 'หลังกลางภาค'},
+                   {title: 'ปลายภาค'},
+                   {title: 'รวม'},
+                   {title: 'ร้อยละ'},
+                   {title: 'ผลการเรียน'},
+                   {title: 'ดาวน์โหลด',
+                     render : function(data,type){
+                       return data='<a href="'+data+'" target="_blank">ดาวน์โหลด</a>'
+                     }},
+                 ]
+
+               });
+                
+            }
+        }
+    </script>
+          <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script> 
+  <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap5.min.js"></script>
+</body>
+
+</html>
